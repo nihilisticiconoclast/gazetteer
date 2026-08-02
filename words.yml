@@ -1,0 +1,416 @@
+# Gazetteer — the philavery
+#
+# Schema is documented in CLAUDE.md. Two standing caveats:
+#
+#   attested:  UNVERIFIED. Century-level placeholders pending a pass against the OED.
+#              Do not build the stratigraphic section on these as they stand.
+#   source:    TODO throughout except `mimeomia`. Back-fill before publication; this
+#              is the field that will be worth most later and is easiest to lose now.
+
+words:
+  - id: acerbic
+    headword: Acerbic
+    gloss: Sharp and sour in manner or speech.
+    etymon: Latin acerbus, sour, unripe, harsh
+    origin: latin
+    attested: 19c
+    tags: [temperament, manner]
+    behaviour: cut
+    source: { book: TODO, page: TODO }
+
+  - id: periphrasis
+    headword: Periphrasis
+    gloss: Saying in many words what could be said in one.
+    etymon: Greek peri, around + phrazein, to speak
+    origin: greek
+    attested: 16c
+    tags: [metatextual, rhetoric]
+    behaviour: circumlocute
+    source: { book: TODO, page: TODO }
+
+  - id: musique-concrete
+    headword: Musique concrète
+    gloss: Composition assembled from recorded sound rather than notation.
+    etymon: French, coined by Pierre Schaeffer, 1948
+    origin: french
+    attested: 1948
+    tags: [art, material]
+    behaviour: found-sound
+    source: { book: TODO, page: TODO }
+
+  - id: ebullition
+    headword: Ebullition
+    gloss: A boiling over, of liquid or of feeling.
+    etymon: Latin ebullire, to boil out
+    origin: latin
+    attested: 16c
+    tags: [motion, feeling]
+    behaviour: boil
+    source: { book: TODO, page: TODO }
+
+  - id: misdirected-amplexus
+    headword: Misdirected amplexus
+    gloss: The mating clasp of an amphibian applied to the wrong object entirely.
+    etymon: Latin amplexus, an embrace; herpetological usage
+    origin: latin
+    attested: 20c
+    tags: [error, embodiment]
+    behaviour: clasp-neighbour
+    source: { book: TODO, page: TODO }
+
+  - id: deictic
+    headword: Deictic
+    gloss: Meaning nothing until you know who is speaking, and where, and when.
+    etymon: Greek deiktikos, able to show
+    origin: greek
+    attested: 19c
+    tags: [metatextual, linguistics]
+    behaviour: deixis
+    source: { book: TODO, page: TODO }
+
+  - id: dinkus
+    headword: Dinkus
+    gloss: The small typographic mark that divides a passage without ending it.
+    etymon: Uncertain; printers' slang, possibly from dinky
+    origin: english
+    attested: 20c
+    tags: [metatextual, typography]
+    behaviour: dinkus
+    source: { book: TODO, page: TODO }
+
+  - id: taedium-vitae
+    headword: Taedium vitae
+    display: Taedium vi•tae
+    gloss: Weariness of life; the condition, not the mood.
+    etymon: Latin, weariness of life
+    origin: latin
+    attested: 18c
+    tags: [temperament, feeling]
+    behaviour: torpor
+    source: { book: TODO, page: TODO }
+    note: >
+      Recorded with a mid-dot in the philavery — Taedium vi•tae — presumably the
+      hyphenation point as it was set in the source. Preserved in `display`.
+
+  - id: obscurantism
+    headword: Obscurantism
+    gloss: Withholding knowledge, or writing so as to prevent its arrival.
+    etymon: Latin obscurare, to darken
+    origin: latin
+    attested: 19c
+    tags: [metatextual, politics]
+    behaviour: obscure
+    source: { book: TODO, page: TODO }
+
+  - id: expunge
+    headword: Expunge
+    gloss: To strike out so thoroughly that the gap closes over.
+    etymon: Latin expungere, to prick out, to mark for deletion
+    origin: latin
+    attested: 17c
+    tags: [metatextual, erasure]
+    behaviour: expunge
+    source: { book: TODO, page: TODO }
+
+  - id: qed
+    headword: Quod erat demonstrandum
+    gloss: Which was to be demonstrated; the mark that a proof has closed.
+    etymon: Latin, translating Greek hoper edei deixai
+    origin: latin
+    attested: 17c
+    tags: [metatextual, mathematics]
+    behaviour: qed
+    source: { book: TODO, page: TODO }
+
+  - id: solipsistic
+    headword: Solipsistic
+    gloss: Proceeding as though nothing outside the self can be known to exist.
+    etymon: Latin solus, alone + ipse, self
+    origin: latin
+    attested: 19c
+    tags: [philosophy, self]
+    behaviour: solus
+    source: { book: TODO, page: TODO }
+
+  - id: tetralemma
+    headword: Tetralemma / śūnyatā
+    gloss: >
+      The four-cornered logic — is, is not, both, neither — and the emptiness left
+      when all four are refused.
+    etymon: Greek tetra, four + lemma, premise; Sanskrit śūnyatā, emptiness
+    origin: sanskrit
+    attested: ancient
+    tags: [philosophy, logic]
+    behaviour: catuskoti
+    source: { book: TODO, page: TODO }
+
+  - id: vexata-quaestio
+    headword: Vexata quaestio
+    gloss: A question long disputed and never settled.
+    etymon: Latin, a vexed question
+    origin: latin
+    attested: 19c
+    tags: [philosophy, dispute]
+    behaviour: unsettled
+    source: { book: TODO, page: TODO }
+
+  - id: flaneur
+    headword: Flâneur
+    gloss: One who walks the city to see it, with no errand.
+    etymon: French flâner, to stroll
+    origin: french
+    attested: 19c
+    tags: [motion, observation]
+    behaviour: flaneur
+    source: { book: TODO, page: TODO }
+
+  - id: mithridate
+    headword: Antidotum Mithridatium
+    gloss: >
+      The universal antidote of Mithridates VI, who is said to have taken poison in
+      rising doses until poison could not touch him.
+    etymon: Latin, after Mithridates VI of Pontus
+    origin: latin
+    attested: antiquity
+    tags: [medicine, tolerance]
+    behaviour: mithridate
+    source: { book: TODO, page: TODO }
+
+  - id: tete-a-claques
+    headword: Tête à claques
+    gloss: A face that invites slapping.
+    etymon: French, head for slaps
+    origin: french
+    attested: 19c
+    tags: [temperament, invective]
+    behaviour: recoil
+    source: { book: TODO, page: TODO }
+
+  - id: abstemious
+    headword: Abstemious
+    gloss: Sparing, especially in what is taken for pleasure.
+    etymon: Latin abs, from + temetum, strong drink
+    origin: latin
+    attested: 17c
+    tags: [temperament, restraint]
+    behaviour: abstain
+    source: { book: TODO, page: TODO }
+    note: >
+      Recorded as "Abstemious (absteemious)" — the parenthesis presumably marking the
+      five vowels in order, which the word is famous for and the variant spelling
+      breaks.
+
+  - id: amanuensis
+    headword: Amanuensis
+    gloss: One who writes what another dictates.
+    etymon: Latin servus a manu, slave at hand
+    origin: latin
+    attested: 17c
+    tags: [metatextual, labour]
+    behaviour: dictation
+    source: { book: TODO, page: TODO }
+
+  - id: effulgence
+    headword: Effulgence
+    gloss: Light shining out from a thing rather than falling on it.
+    etymon: Latin effulgere, to shine forth
+    origin: latin
+    attested: 17c
+    tags: [light, intensity]
+    behaviour: bloom
+    source: { book: TODO, page: TODO }
+
+  - id: ergodic
+    headword: Ergodic
+    gloss: >
+      Of a system whose single long trajectory eventually visits the whole of its
+      available space, so that time spent equals space covered.
+    etymon: Greek ergon, work + hodos, path; Boltzmann
+    origin: greek
+    attested: 20c
+    tags: [mathematics, motion]
+    behaviour: ergodic
+    source: { book: TODO, page: TODO }
+
+  - id: variegated
+    headword: Variegated
+    gloss: Marked with patches of more than one colour.
+    etymon: Latin varius, various + agere, to make
+    origin: latin
+    attested: 17c
+    tags: [colour, surface]
+    behaviour: variegate
+    source: { book: TODO, page: TODO }
+
+  - id: phlegmatic
+    headword: Phlegmatic
+    gloss: Not stirred.
+    etymon: Greek phlegma, one of the four humours
+    origin: greek
+    attested: 14c
+    tags: [temperament, humours]
+    behaviour: inert
+    source: { book: TODO, page: TODO }
+
+  - id: proleptically
+    headword: Proleptically
+    gloss: By way of anticipation; treating as done what has not yet happened.
+    etymon: Greek prolepsis, a taking beforehand
+    origin: greek
+    attested: 16c
+    tags: [metatextual, time]
+    behaviour: prolepsis
+    source: { book: TODO, page: TODO }
+
+  - id: mimeomia
+    headword: Mimeomia
+    gloss: >
+      The frustration of fitting a stereotype you never intended to occupy — of
+      finding you have been wearing a predictable costume all along.
+    etymon: Greek mimos, actor + misos, hatred; coined by John Koenig
+    origin: coined
+    attested: coined
+    tags: [self, neologism]
+    behaviour: typecast
+    source:
+      book: The Dictionary of Obscure Sorrows
+      author: John Koenig
+      page: TODO
+    note: >
+      Not attested — constructed. It is excluded from the stratigraphic section by
+      `origin: coined` rather than given a false date, and the exclusion is the point:
+      the one word here with no history is the one about being read as a type.
+
+  - id: vomitorium
+    headword: Vomitorium
+    gloss: >
+      The passage by which a crowd is discharged from an amphitheatre — not, despite
+      the persistent story, a room for being sick in.
+    etymon: Latin vomere, to spew forth
+    origin: latin
+    attested: 18c
+    tags: [architecture, crowd]
+    behaviour: disgorge
+    source: { book: TODO, page: TODO }
+
+  - id: sybaritic
+    headword: Sybaritic
+    gloss: Devoted to luxury, after a city that was destroyed for it.
+    etymon: After Sybaris, Greek colony in southern Italy
+    origin: greek
+    attested: 16c
+    tags: [temperament, excess]
+    behaviour: ornament
+    source: { book: TODO, page: TODO }
+
+  - id: magniloquent
+    headword: Magniloquent
+    gloss: Speaking in a manner too large for what is being said.
+    etymon: Latin magnus, great + loqui, to speak
+    origin: latin
+    attested: 17c
+    tags: [metatextual, rhetoric]
+    behaviour: magnify
+    source: { book: TODO, page: TODO }
+
+  - id: concomitantly
+    headword: Concomitantly
+    gloss: Alongside, and because of, something else.
+    etymon: Latin con, with + comitari, to accompany
+    origin: latin
+    attested: 17c
+    tags: [relation, time]
+    behaviour: mirror
+    source: { book: TODO, page: TODO }
+
+  - id: cordon-sanitaire
+    headword: Cordon sanitaire
+    gloss: A line drawn around a thing to stop it reaching everything else.
+    etymon: French, sanitary cordon
+    origin: french
+    attested: 19c
+    tags: [politics, containment]
+    behaviour: quarantine
+    source: { book: TODO, page: TODO }
+
+  - id: fillip
+    headword: Fillip
+    gloss: A flick of a finger released from under the thumb; by extension, a small spur.
+    etymon: Imitative
+    origin: english
+    attested: 16c
+    tags: [motion, gesture]
+    behaviour: flick
+    source: { book: TODO, page: TODO }
+
+  - id: azimuthally
+    headword: Azimuthally
+    gloss: With respect to bearing — the angle round the horizon from a fixed direction.
+    etymon: Arabic as-sumūt, the directions
+    origin: arabic
+    attested: 16c
+    tags: [cartography, measurement]
+    behaviour: bearing
+    source: { book: TODO, page: TODO }
+
+  - id: homoscedasticity
+    headword: Homoscedasticity
+    gloss: The condition of a scatter whose spread does not change as it moves.
+    etymon: Greek homos, same + skedastikos, dispersing
+    origin: greek
+    attested: 20c
+    tags: [mathematics, measurement]
+    behaviour: residuals
+    source: { book: TODO, page: TODO }
+
+  - id: quotidian
+    headword: Quotidian
+    gloss: Daily, and therefore beneath notice.
+    etymon: Latin quotidianus, of every day
+    origin: latin
+    attested: 14c
+    tags: [time, ordinary]
+    behaviour: daily
+    source: { book: TODO, page: TODO }
+
+  - id: encomium
+    headword: Encomium
+    gloss: Formal praise, delivered at length and in public.
+    etymon: Greek enkomion, a eulogy at a victory procession
+    origin: greek
+    attested: 16c
+    tags: [rhetoric, praise]
+    behaviour: encomium
+    source: { book: TODO, page: TODO }
+
+  - id: antediluvian
+    headword: Antediluvian
+    gloss: From before the flood; older than the record allows for.
+    etymon: Latin ante, before + diluvium, deluge
+    origin: latin
+    attested: 17c
+    tags: [time, depth]
+    behaviour: stratum
+    source: { book: TODO, page: TODO }
+    note: >
+      Recorded as "Antideluvian" in the philavery. Corrected here: ante + diluvium.
+
+  - id: atavistic
+    headword: Atavistic
+    gloss: Reverting to an ancestral form that had been left behind.
+    etymon: Latin atavus, forefather
+    origin: latin
+    attested: 19c
+    tags: [time, inheritance]
+    behaviour: revert
+    source: { book: TODO, page: TODO }
+
+  - id: alacrity
+    headword: Alacrity
+    gloss: Brisk and cheerful readiness; responding before you were quite asked.
+    etymon: Latin alacritas, liveliness
+    origin: latin
+    attested: 16c
+    tags: [temperament, speed]
+    behaviour: alacrity
+    source: { book: TODO, page: TODO }
