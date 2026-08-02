@@ -1,0 +1,112 @@
+/* ─────────────────────────────────────────────────────────────────────────
+   tunnel-atavistic.css — Tunnel's tokens as they were in the first commit
+   of the style-guide repository (cuddly-lamp @ ce1e1eb, tokens.css),
+   kept in this repository for the `revert` behaviour alone.
+
+   Kept verbatim below. Note what the history actually shows: the palette
+   and the type scale have never changed — the first commit and the current
+   file agree on every hex value and every step. The ancestral forms that
+   HAVE been left behind are the fallback stacks inside the font tokens
+   (Georgia, system-ui, Menlo), so the atavism is rendered through those.
+   See .b-revert in src/tunnel.css.
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* ─────────────────────────────────────────────────────────────────────────
+   tokens.css — the LOCKED layer of the "Tunnel" house design system.
+   Cartography × phase-space. Pair with tunnel-figure.js for the signature.
+
+   This file is the non-negotiable identity: palette, type, hard edges.
+   Everything else (layout, per-page figure) is allowed to vary. Do not
+   substitute the hex values or the typefaces — they ARE the brand.
+
+   For faster fonts, also add to <head> (optional but recommended):
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   ───────────────────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=Public+Sans:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root{
+  /* ── palette — do not substitute ──────────────────────────────────────── */
+  --paper:#EDE7D3;     /* ground / chart paper                                */
+  --ink:#4A3823;       /* primary text                                       */
+  --contour:#7A5C3E;   /* hairline contours, secondary text, captions        */
+  --index:#5A4225;     /* index contours, headings emphasis, borders         */
+  --incident:#3E7C8C;  /* teal — links, the "incident" accent, data viz line */
+  --amber:#E0922B;     /* ONLY where a scalar field runs high (energy/height) */
+  --route:#C0432B;     /* the route — primary action, the single red line     */
+
+  /* ── type — do not substitute ─────────────────────────────────────────── */
+  --font-display:"Fraunces",Georgia,"Times New Roman",serif;
+  --font-body:"Public Sans",system-ui,-apple-system,sans-serif;
+  --font-data:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+
+  /* ── form ─────────────────────────────────────────────────────────────── */
+  --radius:0;                 /* hard edges. no rounded corners, anywhere.    */
+  --rule:1px solid color-mix(in srgb, var(--contour) 38%, transparent);
+  --measure:64ch;             /* reading width                                */
+
+  /* ── type scale ───────────────────────────────────────────────────────── */
+  --step--1:0.84rem;
+  --step-0:1rem;
+  --step-1:1.25rem;
+  --step-2:1.6rem;
+  --step-3:2.4rem;
+  --step-4:clamp(2.6rem, 1.6rem + 4vw, 4.6rem);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-size:var(--step-0);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+/* headings — Fraunces, set tight; no drop shadows, ever */
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:560;line-height:1.05;letter-spacing:-0.005em;margin:0 0 .55em;color:var(--ink)}
+h1{font-size:var(--step-4)}
+h2{font-size:var(--step-3)}
+h3{font-size:var(--step-2)}
+h4{font-size:var(--step-1)}
+p{max-width:var(--measure);margin:0 0 1em}
+strong{font-weight:600}
+
+a{color:var(--incident);text-decoration:underline;text-underline-offset:2px;text-decoration-thickness:1px}
+a:hover{color:var(--route)}
+
+/* eyebrow / lede / data — the recurring text roles */
+.eyebrow{font-family:var(--font-body);font-size:var(--step--1);letter-spacing:.18em;text-transform:uppercase;color:color-mix(in srgb,var(--ink) 68%,transparent);margin:0 0 1rem}
+.lede{font-size:var(--step-1);line-height:1.5;max-width:56ch;color:color-mix(in srgb,var(--ink) 92%,transparent)}
+.data,.caption{font-family:var(--font-data);font-size:var(--step--1)}
+.caption{color:var(--contour)}
+code,kbd,samp{font-family:var(--font-data);font-size:.9em;background:color-mix(in srgb,var(--contour) 12%,transparent);padding:.1em .35em;border-radius:var(--radius)}
+
+/* a hairline divider that reads as an isoline, not a UI line */
+hr,.rule{border:0;height:0;border-top:var(--rule);margin:2.5rem 0}
+
+/* buttons — hard-edged; the primary is the one red "route" */
+.btn{
+  display:inline-block;font-family:var(--font-body);font-size:1rem;line-height:1.2;
+  padding:.8rem 1.4rem;border-radius:var(--radius);border:1px solid var(--index);
+  background:transparent;color:var(--ink);cursor:pointer;text-decoration:none;
+  transition:transform .12s ease, opacity .18s ease;
+}
+.btn:active{transform:translateY(1px)}
+.btn--route{background:var(--route);border-color:var(--route);color:var(--paper)}
+.btn--route:hover{opacity:.92}
+.btn:focus-visible{outline:2px solid var(--incident);outline-offset:3px}
+
+/* the signature figure container — set innerHTML to TunnelFigure.tunnelFigureSVG(seed) */
+.figure{display:block;width:100%;max-width:640px;margin-inline:auto}
+.figure svg{width:100%;height:auto;display:block}
+
+/* generic page scaffold helpers (optional) */
+.wrap{max-width:1120px;margin:0 auto;padding:clamp(28px,5vw,72px)}
+.grid-2{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(32px,5vw,72px);align-items:center}
+@media (max-width:820px){.grid-2{grid-template-columns:1fr}}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}

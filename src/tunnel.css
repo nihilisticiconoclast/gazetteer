@@ -1,0 +1,167 @@
+/* ─────────────────────────────────────────────────────────────────────────
+   tunnel.css — Gazetteer's stylesheet.
+
+   The locked layer (palette, type, hard edges) is NOT defined here: it is
+   linked from the Tunnel skill's single hosted copy, per the skill brief —
+   link, never inline, so an update to Tunnel reaches this page. Everything
+   below is gazetteer-specific layout plus the per-behaviour classes that
+   src/behaviours.js applies. No new palette is defined anywhere in this
+   file; `variegated` holds the sole licence for colour and spends it in
+   .vg-* below, using Tunnel's own accents.
+   ───────────────────────────────────────────────────────────────────────── */
+@import url('https://cdn.jsdelivr.net/gh/nihilisticiconoclast/cuddly-lamp@main/assets/tokens.css');
+
+/* ── masthead ──────────────────────────────────────────────────────────── */
+.masthead{display:flex;align-items:center;justify-content:space-between;gap:1rem;border-bottom:var(--rule);padding-bottom:14px;margin-bottom:clamp(20px,3vw,36px)}
+.brand{display:flex;align-items:center;gap:.7rem}
+.brand .wordmark{font-family:var(--font-data);font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--contour);line-height:1.3}
+.masthead nav a{margin-left:1.3rem;font-family:var(--font-data);font-size:.8rem}
+.masthead nav a[aria-current="true"]{color:var(--ink);text-decoration:none}
+
+/* ── the field and its panel ───────────────────────────────────────────── */
+.field-grid{display:grid;grid-template-columns:minmax(0,1.9fr) minmax(260px,1fr);gap:clamp(16px,2.5vw,32px);align-items:stretch}
+@media (max-width:900px){.field-grid{grid-template-columns:1fr}}
+
+.field{position:relative;height:min(74vh,720px);border:var(--rule);overflow:hidden;background:transparent}
+@media (max-width:900px){.field{height:min(60vh,520px)}}
+
+.node{position:absolute;transform:translate(-50%,-50%);appearance:none;background:transparent;border:0;padding:.15rem .35rem;margin:0;cursor:pointer;font-family:var(--font-display);font-weight:560;font-size:var(--step-0);line-height:1.1;color:var(--ink);white-space:nowrap;transition:opacity .5s ease,color .3s ease;border-radius:var(--radius)}
+.node:focus-visible{outline:2px solid var(--incident);outline-offset:3px}
+.node.is-visited{color:var(--contour)}
+.node.is-current{color:var(--ink)}
+.node.is-unwitnessed{opacity:0;pointer-events:none}
+.node.is-held{color:var(--ink);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+.node.is-expunged .hw{text-decoration:line-through;text-decoration-thickness:2px}
+.node.is-gone{opacity:0;pointer-events:none}
+
+/* the walker's cross-hair — Tunnel's mark, and the one --route element on the page */
+.walker{position:absolute;width:38px;height:38px;pointer-events:none;transform:translate(-50%,-50%);transition:left 800ms cubic-bezier(.35,0,.25,1),top 800ms cubic-bezier(.35,0,.25,1);z-index:3}
+.walker svg{display:block;width:100%;height:100%}
+
+/* the cordon sanitaire's exclusion zone */
+.cordon{position:absolute;border:1px solid var(--index);pointer-events:none}
+.cordon::after{content:"";position:absolute;inset:3px;border:var(--rule)}
+
+/* the proleptic mini-panel: open before the walker arrives, retracts on arrival */
+.pro-mini{position:absolute;transform:translate(-50%,0);max-width:24ch;background:var(--paper);border:var(--rule);padding:.5rem .7rem;font-size:var(--step--1);line-height:1.45;color:var(--ink);z-index:2;transition:opacity .6s ease;pointer-events:none}
+.pro-mini.is-retracted{opacity:0}
+
+/* the definition panel */
+.panel{border:var(--rule);padding:clamp(14px,2vw,22px);min-height:0;overflow:auto;opacity:0;transition:opacity .28s ease;position:relative}
+.panel.is-open{opacity:1}
+.panel .p-hw{font-family:var(--font-display);font-weight:560;font-size:var(--step-2);line-height:1.05;margin:0 0 .5rem}
+.panel .p-gloss{max-width:var(--measure);margin:0 0 1rem}
+.panel .p-meta{font-family:var(--font-data);font-size:var(--step--1);color:var(--contour);line-height:1.7}
+.panel .p-meta span{display:block}
+.panel .p-extra{margin-top:1rem}
+.panel .p-note{font-size:var(--step--1);color:var(--contour);margin-top:1rem;max-width:52ch}
+.panel .qed-mark{font-family:var(--font-data);text-align:right;margin-top:1rem}
+.panel .p-hint{font-family:var(--font-data);font-size:var(--step--1);color:var(--contour);margin-top:1.2rem}
+.panel button.inline{appearance:none;border:1px solid var(--index);background:transparent;color:var(--ink);font-family:var(--font-data);font-size:var(--step--1);padding:.35rem .7rem;cursor:pointer;border-radius:var(--radius)}
+.panel button.inline:focus-visible{outline:2px solid var(--incident);outline-offset:3px}
+
+/* field footer line: mode + coverage, in the survey voice */
+.field-status{font-family:var(--font-data);font-size:var(--step--1);color:var(--contour);margin-top:.7rem;display:flex;gap:2rem;flex-wrap:wrap}
+
+/* ── per-behaviour classes (field) ─────────────────────────────────────── */
+
+/* effulgence — light emitted from the glyphs themselves, not applied to them */
+.b-bloom .hw{text-shadow:0 0 6px rgba(255,250,232,.95),0 0 14px rgba(255,247,222,.8),0 0 26px rgba(255,244,212,.55)}
+
+/* abstemious — declines every optional rule: minimum scale, no transitions */
+.b-abstain{font-family:var(--font-body);font-weight:400;font-size:var(--step--1);transition:none!important}
+.panel.b-abstain .p-hw{font-family:var(--font-body);font-weight:400;font-size:var(--step-0)}
+.panel.b-abstain{transition:none!important}
+
+/* magniloquent — a scale out of proportion to a one-clause gloss */
+.b-magnify .hw{font-size:var(--step-3)}
+.panel.b-magnify .p-hw{font-size:var(--step-4)}
+.panel.b-magnify .p-gloss{font-size:var(--step-1)}
+
+/* mimeomia — browser defaults; the one entry with no Tunnel tokens at all */
+.b-typecast{font-family:"Times New Roman",Times,serif;font-weight:400;background:#fff;color:#000;padding:.15rem .3rem}
+.panel.b-typecast{font-family:"Times New Roman",Times,serif;background:#fff;color:#000;border:1px solid #000}
+.panel.b-typecast .p-hw{font-family:"Times New Roman",Times,serif;font-weight:700;font-size:1.5em}
+.panel.b-typecast .p-meta{font-family:"Times New Roman",Times,serif;color:#000}
+.panel.b-typecast a{color:#00e;text-decoration:underline}
+
+/* atavistic — Tunnel's ancestral forms: the fallback stacks of the first
+   commit's own token file (Georgia / system-ui / Menlo). The palette never
+   changed between that commit and now — see src/tunnel-atavistic.css — so
+   the reversion is carried by type alone, which is what the history allows. */
+.b-revert{font-family:Georgia,"Times New Roman",serif;font-weight:400}
+.panel.b-revert .p-hw{font-family:Georgia,"Times New Roman",serif;font-weight:400}
+.panel.b-revert .p-gloss{font-family:system-ui,-apple-system,sans-serif}
+.panel.b-revert .p-meta{font-family:Menlo,SFMono-Regular,monospace}
+
+/* sybaritic — the only ornament on the site */
+.panel.b-ornament .p-gloss::first-letter{font-family:var(--font-display);font-size:3.2em;float:left;line-height:.82;padding:.04em .12em 0 0;color:var(--index)}
+.panel.b-ornament .p-hw{border-bottom:3px double var(--index);padding-bottom:.3rem}
+.panel.b-ornament .p-extra{text-align:center;color:var(--contour);letter-spacing:.6em}
+
+/* variegated — the sole licence for colour on the site, spent as patches */
+.vg-a{background:color-mix(in srgb,var(--incident) 42%,transparent)}
+.vg-b{background:color-mix(in srgb,var(--amber) 48%,transparent)}
+.vg-c{background:color-mix(in srgb,var(--contour) 38%,transparent)}
+.vg-d{background:color-mix(in srgb,var(--incident) 20%,transparent)}
+
+/* acerbic — the panel edge drawn as one fast stroke */
+.panel.b-cut::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--ink);transform-origin:left;animation:cut-stroke .16s ease-out}
+@keyframes cut-stroke{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* ebullition — rises from the lower edge and overtops it */
+.panel.b-boil{animation:boil-up .55s cubic-bezier(.2,.9,.3,1.15)}
+@keyframes boil-up{0%{transform:translateY(46px);opacity:0}70%{transform:translateY(-8px)}100%{transform:translateY(0);opacity:1}}
+
+/* taedium vitae — every transition at punishing length; nothing else is slow */
+.panel.b-torpor{transition:opacity 7s ease}
+.b-torpor{transition:opacity 7s ease,color 7s ease}
+
+/* tête à claques — flinches from the cursor and returns */
+.b-recoil{transition:transform .16s ease-out,opacity .5s ease,color .3s ease}
+
+/* obscurantism — legibility under sustained attention only */
+.panel.b-obscure .p-gloss{filter:blur(7px);transition:filter .45s ease}
+
+/* dinkus — a divider, not a node, until engaged */
+.b-dinkus{font-size:var(--step-1);letter-spacing:.1em}
+
+/* ── plain view ────────────────────────────────────────────────────────── */
+.philavery{max-width:var(--measure);margin:0}
+.entry{padding:1.1rem 0;border-top:var(--rule)}
+.entry:first-child{border-top:0}
+.entry .e-hw{font-family:var(--font-display);font-weight:560;font-size:var(--step-1);margin:0 0 .3rem}
+.entry .e-gloss{margin:0 0 .4rem}
+.entry .e-meta{font-family:var(--font-data);font-size:var(--step--1);color:var(--contour);line-height:1.7}
+.entry .e-extra{font-family:var(--font-data);font-size:var(--step--1);margin-top:.4rem}
+.entry .e-note{font-size:var(--step--1);color:var(--contour);margin-top:.4rem;max-width:52ch}
+.entry.is-struck .e-hw,.entry.is-struck .e-gloss{text-decoration:line-through}
+.entry.is-ruled{border:1px solid var(--index);padding:1.1rem 1.2rem;margin:1.1rem 0}
+.entry.is-abstain .e-hw{font-family:var(--font-body);font-weight:400;font-size:var(--step-0)}
+.entry.is-typecast{font-family:"Times New Roman",Times,serif;background:#fff;color:#000;padding:1.1rem 1.2rem}
+.entry.is-typecast .e-hw{font-family:"Times New Roman",Times,serif;font-weight:700}
+.entry.is-typecast .e-meta{font-family:"Times New Roman",Times,serif;color:#000}
+.entry.is-revert .e-hw{font-family:Georgia,serif;font-weight:400}
+.entry.is-ornament .e-gloss::first-letter{font-family:var(--font-display);font-size:2.6em;float:left;line-height:.85;padding:.04em .1em 0 0;color:var(--index)}
+.entry.is-magnify .e-hw{font-size:var(--step-3)}
+.entry.is-bloom .e-hw{text-shadow:0 0 6px rgba(255,250,232,.95),0 0 14px rgba(255,247,222,.7)}
+.entry.is-mirror .e-gloss{font-style:italic}
+.entry.is-floor{border-top:3px double var(--index)}
+.plain-divider{text-align:center;letter-spacing:.5em;padding:1.2rem 0;border-top:var(--rule);color:var(--ink)}
+.plain-close{font-family:var(--font-data);text-align:right;max-width:var(--measure);padding:1rem 0 0}
+
+/* ── stratigraphic section ─────────────────────────────────────────────── */
+.strata{margin:0;padding:0;list-style:none}
+.strata .band{display:grid;grid-template-columns:9ch 1fr;gap:1.2rem;border-top:var(--rule);padding:.85rem 0;align-items:baseline}
+.strata .band.is-index{border-top:1px solid var(--index)}
+.strata .year{font-family:var(--font-data);font-size:var(--step--1);color:var(--contour)}
+.strata .band-words{display:flex;flex-wrap:wrap;gap:.4rem 1.6rem;margin:0}
+.strata .band-words span{font-family:var(--font-display);font-weight:560}
+.strata .floor{border-top:3px double var(--index);padding-top:.85rem}
+.strata-gap{font-family:var(--font-data);font-size:var(--step--1);color:var(--contour);margin-top:1.4rem;max-width:52ch}
+
+/* ── explanation prose ─────────────────────────────────────────────────── */
+.about{margin-top:clamp(36px,6vw,64px)}
+.about h2{font-size:var(--step-2)}
+.foot{margin-top:3rem;padding-top:1rem;border-top:var(--rule);display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.foot .caption{margin:0}

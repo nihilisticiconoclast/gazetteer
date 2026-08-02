@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gazetteer — a philavery</title>
+<meta name="description" content="A philavery of thirty-eight words, laid out as a field rather than a list, in which every entry behaves according to its own meaning.">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="src/tunnel.css">
+</head>
+<body data-seed="gazetteer">
+  <main class="wrap">
+
+    <div class="masthead">
+      <div class="brand">
+        <span class="sig" id="sig"></span>
+        <span class="wordmark">Gazetteer<br>Philavery</span>
+      </div>
+      <nav id="nav">
+        <a href="?field" data-view="field">Field</a>
+        <a href="?section" data-view="section">Section</a>
+        <a href="?plain" data-view="plain">Plain</a>
+      </nav>
+    </div>
+
+    <div class="doodle" id="doodle"></div>
+
+    <section id="view-field" hidden>
+      <p class="eyebrow">Thirty-eight words · index to a terrain</p>
+      <p class="lede">The words are the index; the field is the terrain; the walk
+      between them is the reading. Every entry behaves according to its own
+      meaning, and the definition arrives after the behaviour has already told
+      it.</p>
+
+      <div class="field-grid">
+        <div class="field" id="field" aria-label="the field of words"></div>
+        <aside class="panel" id="panel" aria-live="polite"></aside>
+      </div>
+      <div class="field-status" id="field-status"></div>
+    </section>
+
+    <section id="view-section" hidden>
+      <p class="eyebrow">Stratigraphic section · first attestation</p>
+      <p class="lede">The philavery against depth of time: each band is a century
+      of first attestation, youngest at the top, oldest at the base.</p>
+      <div id="strata"></div>
+    </section>
+
+    <section id="view-plain" hidden>
+      <p class="eyebrow">The philavery, plainly</p>
+      <p class="lede">Every entry, alphabetised, with gloss, etymon, date and
+      source visible and no behaviour attached — except where an entry's own
+      plain rendering says otherwise. The field view remains one link away.</p>
+      <div id="plain"></div>
+    </section>
+
+    <hr>
+
+    <section class="about">
+      <h2>What this is</h2>
+      <p>A philavery: a personal hoard of words, thirty-eight of them, collected
+      rather than compiled. A gazetteer is the index to a map — the alphabetical
+      list that only makes sense alongside the terrain it refers to — and that is
+      the shape of this site. The plain view is the index; the field is the
+      terrain.</p>
+
+      <p>The single rule the site exists to enforce: a word's behaviour is
+      derived from its definition, and the definition is what arrives after the
+      behaviour has already told it. <em>Phlegmatic</em> does nothing at all,
+      and that is its implementation, not an omission. Nothing here is animated
+      because animation is nice.</p>
+
+      <h2>The field, and how it is walked</h2>
+      <p>Words are nodes in a two-dimensional field, positioned by a force
+      layout over two axes: language of origin runs across, semantic cluster
+      runs down. One word holds a bordered exclusion zone no other word may
+      enter; one word never comes to rest; one anchors the lowest point with the
+      water column above it. A cross-hair — the walker, the one red mark on the
+      page — moves between adjacent words. Arrow keys move it, Enter activates
+      the word under it, Escape closes the definition panel, and clicking any
+      word walks there. Whether the walker is driven or drifts is decided in the
+      field itself, at the entry whose meaning is the holding of that choice.</p>
+
+      <h2>What the numbers mean</h2>
+      <p>The coverage figure inside the entry for <em>ergodic</em> is visited
+      words over total words, as a proportion; steps counts arrivals, including
+      repeats. The gap between the two is the point: the walk is much longer
+      than the map. Both persist in this browser's localStorage, so the figure
+      is a record of strolling, not a session counter. The dose count on
+      <em>Antidotum Mithridatium</em> persists the same way, and the bearing on
+      <em>azimuthally</em> does not survive a reload, which is what a session
+      deserves.</p>
+
+      <h2>What is exact and what is idealised</h2>
+      <p>The attestation dates behind the stratigraphic section are
+      century-level placeholders, not yet verified against the OED; the section
+      says so where it is drawn. Provenance is recorded for one word only —
+      <em>mimeomia</em> — and reads TODO everywhere else, which is stated rather
+      than hidden because the source field is the one that will matter most in
+      ten years. <em>Musique concrète</em> shows the waveform of a recording,
+      rendered and not played; the audio dependency was judged not worth
+      carrying. And <em>atavistic</em> reverts to the first commit of the house
+      style's own tokens, whose palette turns out never to have changed — so the
+      reversion is carried by the ancestral typefaces kept inside the token
+      file's own fallback stacks.</p>
+    </section>
+
+    <div class="foot">
+      <p class="caption">Gazetteer — a philavery, set in Tunnel.</p>
+      <p class="caption"><a href="https://github.com/nihilisticiconoclast/gazetteer">repository</a></p>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/nihilisticiconoclast/cuddly-lamp@main/assets/tunnel-figure.js"></script>
+  <script type="module">
+    import { audit } from './src/behaviours.js';
+    import { initField } from './src/field.js';
+    import { renderPlain } from './src/plain.js';
+    import { renderStrata } from './src/strata.js';
+
+    const params = new URLSearchParams(location.search);
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const view = params.has('plain') ? 'plain'
+      : params.has('section') ? 'section'
+      : params.has('field') ? 'field'
+      : reduced ? 'plain' : 'field';
+
+    document.getElementById('view-' + view).hidden = false;
+    for (const a of document.querySelectorAll('#nav a')) {
+      if (a.dataset.view === view) a.setAttribute('aria-current', 'true');
+    }
+
+    // the fixed house mark (seed ignored), and the per-page doodle — seeded per
+    // view so each view of the site carries its own scribble, stable on reload
+    document.getElementById('sig').innerHTML =
+      TunnelFigure.tunnelFigureSVG(null, { variant: 'mark' });
+    const seed = 'gazetteer/' + view;
+    const doodle = document.getElementById('doodle');
+    doodle.innerHTML = TunnelFigure.tunnelFigureSVG(seed, { variant: 'doodle' });
+    TunnelFigure.placeDoodle(doodle, { seed });
+
+    const res = await fetch('data/words.yml');
+    const words = jsyaml.load(await res.text()).words;
+    const { orphaned } = audit(words);
+    if (orphaned.length) console.warn('behaviours with no word:', orphaned);
+
+    if (view === 'field') {
+      initField(
+        words,
+        document.getElementById('field'),
+        document.getElementById('panel'),
+        document.getElementById('field-status'),
+      );
+    } else if (view === 'plain') {
+      renderPlain(words, document.getElementById('plain'));
+    } else {
+      renderStrata(words, document.getElementById('strata'));
+    }
+  </script>
+</body>
+</html>
